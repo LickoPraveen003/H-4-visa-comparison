@@ -1,0 +1,75 @@
+<div class="box-border">
+  <div class="main">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="fw-bold">Rules List</h5>
+      <button class="btn btn-add" (click)="editRule('','New')">
+        <i class="fa fa-plus"></i>
+        Add Rule</button>
+    </div>
+    <hr>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-bordered align-middle">
+        <thead class="table-dark text-white">
+          <tr>
+            <th (click)="sortData('ruleId')">
+              <div class="table-header">
+                Rule Id
+                <span title="Sort">
+                  <i class="fa-solid fa-sort"></i>
+                </span>
+              </div>
+            </th>
+            <th (click)="sortData('ruleName')">
+              <div class="table-header">
+                Rule Name
+                <span title="Sort">
+                  <i class="fa-solid fa-sort"></i>
+                </span>
+              </div>
+            </th>
+            <th (click)="sortData('docType')">
+              <div class="table-header">
+                Doc Type
+                <span title="Sort">
+                  <i class="fa-solid fa-sort"></i>
+                </span>
+              </div>
+            </th>
+            <th (click)="sortData('severity')">
+              <div class="table-header">
+                Severity
+                <span title="Sort">
+                  <i class="fa-solid fa-sort"></i>
+                </span>
+              </div>
+            </th>
+            <th (click)="sortData('priority')">
+              <div class="table-header">
+                Priority
+                <span title="Sort">
+                  <i class="fa-solid fa-sort"></i>
+                </span>
+              </div>
+            </th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rule of rules">
+            <td class="pointer" (click)="editRule(rule,'View')"><strong>{{ rule.ruleId }}</strong></td>
+            <td>{{ rule.ruleName }}</td>
+            <td>{{ rule.docType }}</td>
+            <td>{{ rule.severity }}</td>
+            <td>{{ rule.priority }}</td>
+            <td>
+              <button class="btn btn-sm">
+                <i class="fa fa-pencil" title="Edit" (click)="editRule(rule,'Edit')"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

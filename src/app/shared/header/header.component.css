@@ -1,0 +1,50 @@
+.header {
+  background-color: #19305E;
+  padding: 10px 20px;
+  color: white;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+}
+
+.logo {
+  height: 32px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.help {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.avatar img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.dropdown {
+  font-size: 12px;
+}
+.logout-icon{
+  margin-right: 10px;
+}

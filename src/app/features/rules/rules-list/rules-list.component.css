@@ -1,0 +1,63 @@
+.box-border {
+    padding: 30px 40px;
+    background-color: #f2f2f2;
+}
+
+.main {
+    padding: 30px 40px;
+    background-color: white;
+    min-height: 520px;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.btn-add {
+    padding: 0px 20px;
+    height: 40px;
+    font-weight: 700;
+    background: #002E59;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+hr {
+    margin: 1rem 0px 2rem 0px;
+}
+
+.table>thead {
+    vertical-align: middle !important;
+}
+
+.table>:not(caption)>*>* {
+    padding: .5rem 1.5rem !important;
+}
+
+.table-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fa-sort {
+    cursor: pointer;
+    color: #639abf;
+}
+
+.fa-sort:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.table-dark{
+    --bs-table-border-color: grey !important;
+    --bs-table-bg:#3C83AF !important;
+    background-color: #3C83AF !important;
+}

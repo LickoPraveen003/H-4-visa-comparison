@@ -1,0 +1,39 @@
+.box-border {
+    padding: 30px 40px;
+    background-color: #f2f2f2;
+}
+
+.main {
+    padding: 30px 40px;
+    background-color: white;
+    min-height: 480px;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+hr {
+    margin: 1rem 0px 2rem 0px;
+}
+
+.btn-submit {
+    padding: 0px 20px;
+    height: 40px;
+    background: #002c56;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn-cancel {
+    padding: 0px 20px;
+    height: 40px;
+    background: white;
+    color: black;
+    font-size: 16px;
+    border: 1px solid #bbb;
+    font-weight: 500;
+}
+
+.form-label {
+    font-weight: 500;
+}

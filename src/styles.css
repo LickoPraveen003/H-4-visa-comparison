@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    margin: 0px;
+    font-family: sans-serif;
+}
+.alert{
+  font-size: 12px;
+  overflow-wrap: break-word;
+  padding: 5px !important;
+  margin-top: 10px;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__content{
+  color: unset !important;
+}

@@ -1,0 +1,28 @@
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1d2d3c !important;
+    color: #FFFFFF;
+    --mdc-dialog-subhead-color: #FFFFFF;
+}
+
+.dialog-header h2 {
+    margin: 0;
+    font-weight: 500;
+    --mdc-dialog-subhead-weight: 500;
+    font-size: 18px !important;
+    display: flex;
+    align-items: center;
+    padding-bottom: 0px;
+}
+
+.dialog-header button {
+    margin-left: auto;
+}
+
+.btn-sec {
+    width: 100px;
+    margin: 0px 10px 0px 10px;
+    border-color: #134C7B !important;
+}

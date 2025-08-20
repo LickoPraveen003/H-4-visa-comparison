@@ -1,0 +1,13 @@
+<div class="dialog-header">
+    <h2 mat-dialog-title>{{ data.title }}</h2>
+    <!-- <button mat-icon-button (click)="close()" class="close-btn" aria-label="Close">
+        <mat-icon>close</mat-icon>
+    </button> -->
+</div>
+<mat-dialog-content>
+    <p>{{ data.message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="warn" class="btn-sec" (click)="onCancel()">No</button>
+    <button mat-raised-button color="primary" class="btn-sec" (click)="close()">Yes</button>
+</mat-dialog-actions>
