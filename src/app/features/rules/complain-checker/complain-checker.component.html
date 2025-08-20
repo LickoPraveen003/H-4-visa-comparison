@@ -1,0 +1,124 @@
+<div class="box-border">
+    <div class="main">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold">Complaince Checker</h5>
+        </div>
+        <hr>
+        <div class="complaince-form" *ngIf="!ischeckCompliance">
+            <form [formGroup]="uploadForm">
+                <div class="row mt-3">
+                    <div class="col-lg-3 col-sm-3">
+                        <label for="docType" class="form-label">Select the type of document</label>
+                    </div>
+                    <div class="col-lg-6 col-sm-9">
+                        <select id="docType" class="form-select" formControlName="docType">
+                            <option value="">Select</option>
+                            <option>HexaCorp</option>
+                        </select>
+                        <div *ngIf="uploadForm.get('docType')!.invalid && uploadForm.get('docType')!.touched">
+                            <small class="text-danger" *ngIf="uploadForm.get('docType')!.errors?.['required']">Document
+                                Type is required.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-3 col-sm-3">
+                        <label for="document upload" class="form-label">Document Upload</label>
+                    </div>
+                    <div class="col-lg-6 col-sm-9">
+                        <div class="dot-box" (drop)="onDropDoc($event)" (dragover)="onDragOverDoc($event)"
+                            (dragleave)="onDragLeaveDoc($event)" *ngIf="!isDocEntered">
+                            <img src="../../../../assets/icons/doc-table-icon.png" alt="">
+                            <p>Drag & drop or choose a document to upload</p>
+                            <span>Limit 200MB per file</span>
+
+                            <div class="btn-section">
+                                <button class="btn black-btn" (click)="fileInputDoc.click()">Upload file</button>
+                                <input type="file" #fileInputDoc hidden accept=".pdf, .doc, .docx, .txt"
+                                    (change)="onFileSelectedDoc($event)" />
+                            </div>
+                        </div>
+                        <div class="dot-box" *ngIf="isDocEntered">
+                            <img src="../../../../assets/images/uploaded-doc.png" alt="" height="100px">
+                            <p class="doc-name">
+                                {{ documentName }}
+                                <i class="doc-name-close" (click)="resetDoc()">&times;</i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-3 col-sm-3">
+                        <label for="rule" class="form-label">Select Rule</label>
+                    </div>
+                    <div class="col-lg-6 col-sm-9">
+                        <select id="rule" class="form-select" formControlName="rule">
+                            <option value="">Select</option>
+                            <option>rule1</option>
+                        </select>
+                        <div *ngIf="uploadForm.get('rule')!.invalid && uploadForm.get('rule')!.touched">
+                            <small class="text-danger" *ngIf="uploadForm.get('rule')!.errors?.['required']">Rule
+                                is required.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3 col-sm-12">
+                    </div>
+                    <div class="col-md-9 col-sm-12">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-cancel me-2 mt-3" (click)="onCancel()">Cancel</button>
+                            <button type="button" class="btn btn-submit mt-3" [disabled]="isDocUploaded"
+                                (click)="checkCompliance()">Check rule complaince</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="ischeckCompliance">
+            <div class="results">
+                <div class="d-flex">
+                        <h6 class="me-2 mb-0">Document Name:</h6>
+                        <h5 class="main-title mb-0">H-4 Visa</h5>
+                    </div>
+                <div class="center-align">
+                    <div class="center-align">
+                        <h6 class="mb-0">Rules passed:</h6>
+                        <h5 class="main-title mb-0">2/3</h5>
+                    </div>
+                    <div class="center-align">
+                        <h6 class="mb-0">Compliance:</h6>
+                        <h5 class="main-title mb-0">78%</h5>
+                    </div>
+                    <div class="center-align">
+                        <h6 class="mb-0">Status:</h6>
+                        <button class="btn status-btn">Not ready</button>
+                    </div>
+                </div>
+            </div>
+            <h4 class="main-title mt-3">Rule Details</h4>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item" *ngFor="let item of compareData; let i = index">
+                    <h2 class="accordion-header" [id]="'heading' + i">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            [attr.data-bs-target]="'#collapse' + i" [attr.aria-controls]="'collapse' + i"
+                            [attr.aria-expanded]="i === 0 ? 'true' : 'false'" [class.collapsed]="i !== 0">
+                            <img src="../../../../assets/images/check-circle.png" class="me-2"
+                                *ngIf="item.severity === 'High'">
+                            <img src="../../../../assets/images/warning-circle.png" class="me-2"
+                                *ngIf="item.severity === 'Low'">
+                            {{ item.rule_number }}. {{ item.rule_name }}
+
+                        </button>
+                    </h2>
+                    <div [id]="'collapse' + i" class="accordion-collapse collapse" [class.show]="i === 0"
+                        [attr.aria-labelledby]="'heading' + i" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>{{ item.rule_description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

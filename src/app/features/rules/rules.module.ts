@@ -8,11 +8,15 @@ import { CreateRulesComponent } from './create-rules/create-rules.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ComplainCheckerComponent } from './complain-checker/complain-checker.component';
+import { RulesTableComponent } from '../complaince/rules-table/rules-table.component';
 
 @NgModule({
   declarations: [
     RulesListComponent,
-    CreateRulesComponent
+    CreateRulesComponent,
+    RulesTableComponent,
+    ComplainCheckerComponent
   ],
   imports: [
     CommonModule,

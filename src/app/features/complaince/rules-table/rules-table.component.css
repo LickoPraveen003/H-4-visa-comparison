@@ -1,0 +1,65 @@
+.form-label{
+    font-family: 'Subheading/Font Family', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.edit-btn{
+    font-family: sans-serif;
+    font-weight: 600;
+    color: #073339;
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.compliance-result{
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #bbb;
+}
+
+.center-align{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-btn{
+    color: #FF3330;
+    border: 1px solid #FF3330;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.results {
+    padding: 20px;
+    background: #F3F3F3;
+    border-radius: 20px;
+}
+
+.status-icon{
+
+}
+
+.accordion-button:not(.collapsed) {
+    color: black;
+    background-color: #FFEFEF;
+}
+
+.accordion-button{
+    color: black;
+    background-color: #FFEFEF;
+}
+
+.accordion-item{
+    border: 0px;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url(../../../../assets/icons/minus-black.png);
+}
+
+.accordion-button::after {
+    background-image: url(../../../../assets/icons/plus-black.png);
+}

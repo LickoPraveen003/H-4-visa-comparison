@@ -1,0 +1,175 @@
+.box-border {
+    padding: 30px 40px;
+    background-color: #f2f2f2;
+}
+
+.main {
+    padding: 30px 40px;
+    background-color: white;
+    min-height: 520px;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.btn-add {
+    padding: 0px 20px;
+    height: 40px;
+    font-weight: 700;
+    background: #002E59;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+hr {
+    margin: 1rem 0px 2rem 0px;
+}
+
+.btn-submit {
+    padding: 0px 20px;
+    height: 40px;
+    background: #002c56;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn-cancel {
+    padding: 0px 20px;
+    height: 40px;
+    background: white;
+    color: black;
+    font-size: 16px;
+    border: 1px solid #bbb;
+    font-weight: 500;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+.dot-box {
+    padding: 30px;
+    background-color: white;
+    border: 1px dashed #858585;
+    text-align: center;
+}
+
+.dot-box p {
+    font-family: 'Subheading/Font Family', sans-serif;
+    font-weight: normal;
+    color: #073339;
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+
+.dot-box span {
+    font-family: 'Subheading/Font Family', sans-serif;
+    font-weight: normal;
+    color: #6D717F;
+    font-size: 14px;
+}
+
+.dot-box u {
+    cursor: pointer;
+}
+
+.dot-box img {
+    margin-bottom: 20px;
+}
+
+.black-btn {
+    font-family: sans-serif;
+    background: #073339;
+    border-radius: 12px;
+    font-weight: 600;
+    color: white;
+    font-size: 14px;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 40px;
+}
+
+.btn-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.doc-name-close {
+    cursor: pointer;
+    font-size: 25px;
+    color: #073339;
+    margin-left: 10px;
+}
+
+.doc-name {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    background: #E5E7EA;
+    text-align: center;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+
+.center-align{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.status-btn{
+    color: #FF3330;
+    border: 1px solid #FF3330;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.results {
+    padding: 20px;
+    background: #F3F3F3;
+    border-radius: 20px;
+}
+
+.accordion-button:not(.collapsed) {
+    color: black;
+    background-color: #FFEFEF;
+}
+
+.accordion-button{
+    color: black;
+    background-color: #FFEFEF;
+    font-weight: 500;
+}
+
+.accordion-item{
+    border: 0px;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url(../../../../assets/icons/minus-black.png);
+}
+
+.accordion-button::after {
+    background-image: url(../../../../assets/icons/plus-black.png);
+}
+
+.status-icon{
+    margin-right: 10px;
+}
+
+.main-title {
+    font-family: 'Title Page/Font Family', sans-serif;
+    color: #073339;
+    font-weight: 700;
+}
