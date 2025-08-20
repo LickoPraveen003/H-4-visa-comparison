@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { RulesListComponent } from './rules-list/rules-list.component';
 import { CreateRulesComponent } from './create-rules/create-rules.component';
 import { ComplainCheckerComponent } from './complain-checker/complain-checker.component';
-import { RulesTableComponent } from '../complaince/rules-table/rules-table.component';
 
 const routes: Routes = [
   {
@@ -15,11 +14,8 @@ const routes: Routes = [
   {
     path: 'check', component: ComplainCheckerComponent
   },
-  {
-    path: 'table', component: RulesTableComponent
-  },
-  { path: '', pathMatch: 'full', redirectTo: 'check' },
-  { path: '**', redirectTo: 'check' }
+  { path: '', pathMatch: 'full', redirectTo: 'list' },
+  { path: '**', redirectTo: 'list' }
 ];
 
 @NgModule({
