@@ -121,14 +121,14 @@ hr {
 }
 
 
-.center-align{
+.center-align {
     display: flex;
     align-items: center;
     gap: 10px;
     justify-content: space-between;
 }
 
-.status-btn{
+.status-btn {
     color: #FF3330;
     border: 1px solid #FF3330;
     border-radius: 20px;
@@ -146,13 +146,13 @@ hr {
     background-color: #FFEFEF;
 }
 
-.accordion-button{
+.accordion-button {
     color: black;
     background-color: #FFEFEF;
     font-weight: 500;
 }
 
-.accordion-item{
+.accordion-item {
     border: 0px;
     margin-bottom: 10px;
 }
@@ -165,7 +165,7 @@ hr {
     background-image: url(../../../../assets/icons/plus-black.png);
 }
 
-.status-icon{
+.status-icon {
     margin-right: 10px;
 }
 

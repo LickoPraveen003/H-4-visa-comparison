@@ -81,7 +81,7 @@ export class CreateRulesComponent {
   }
 
 
-  createRule(){
+  createRule() {
     this.spinner.show();
     let reqObj = {
       rule_id: this.ruleForm.get('ruleId')?.value || "",
@@ -92,55 +92,55 @@ export class CreateRulesComponent {
       priority: this.ruleForm.get('priority')?.value || "",
       severity: this.ruleForm.get('severity')?.value || ""
     }
-    if(this.isMode === 'New'){
-      this.apiService.post('/rule/create',reqObj).subscribe(
-      (res: any) => {
-        this.spinner.hide();
-        if (res.body.status_code === 200 || res.body.status_code === 201) {
-          this.toastr.success(res.body.message);
-          this.router.navigate(['rules/list']);
-        }
-        else {
-          this.toastr.error(res.body.message);
+    if (this.isMode === 'New') {
+      this.apiService.post('/rule/create', reqObj).subscribe(
+        (res: any) => {
+          this.spinner.hide();
+          if (res.body.status_code === 200 || res.body.status_code === 201) {
+            this.toastr.success(res.body.message);
+            this.router.navigate(['rules/list']);
+          }
+          else {
+            this.toastr.error(res.body.message);
+            setTimeout(() => {
+              this.toastr.clear();
+            }, 3000);
+          }
+        },
+        (error: any) => {
+          this.spinner.hide()
+          this.toastr.error(error?.statusText || 'An error occurred while processing your request. Please try again later.');
           setTimeout(() => {
             this.toastr.clear();
           }, 3000);
         }
-      },
-      (error: any) => {
-        this.spinner.hide()
-        this.toastr.error(error?.statusText || 'An error occurred while processing your request. Please try again later.');
-        setTimeout(() => {
-          this.toastr.clear();
-        }, 3000);
-      }
-    );
+      );
     }
-    if(this.isMode === 'Edit'){
-      this.apiService.put('/rule/update',reqObj).subscribe(
-      (res: any) => {
-        this.spinner.hide();
-        if (res.body.status_code === 200 || res.body.status_code === 201) {
-          this.toastr.success(res.body.message);
-          this.router.navigate(['rules/list']);
-        }
-        else {
-          this.toastr.error(res.body.message);
+    if (this.isMode === 'Edit') {
+      this.apiService.put('/rule/update', reqObj).subscribe(
+        (res: any) => {
+          this.spinner.hide();
+          if (res.body.status_code === 200 || res.body.status_code === 201) {
+            this.toastr.success(res.body.message);
+            this.router.navigate(['rules/list']);
+          }
+          else {
+            this.toastr.error(res.body.message);
+            setTimeout(() => {
+              this.toastr.clear();
+            }, 3000);
+          }
+        },
+        (error: any) => {
+          this.spinner.hide()
+          this.toastr.error(error?.statusText || 'An error occurred while processing your request. Please try again later.');
           setTimeout(() => {
             this.toastr.clear();
           }, 3000);
         }
-      },
-      (error: any) => {
-        this.spinner.hide()
-        this.toastr.error(error?.statusText || 'An error occurred while processing your request. Please try again later.');
-        setTimeout(() => {
-          this.toastr.clear();
-        }, 3000);
-      }
-    );
+      );
     }
-    
+
   }
 
 }

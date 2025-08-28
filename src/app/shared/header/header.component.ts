@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   constructor(private router: Router) { }
-  
-    ngOnInit(): void { }
-  
-    backToDashboard() {
-      this.router.navigate(['/rules/check']);
-    }
+
+  ngOnInit(): void { }
+
+  backToDashboard() {
+    this.router.navigate(['/rules/check']);
+  }
 }

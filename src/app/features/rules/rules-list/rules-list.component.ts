@@ -14,26 +14,26 @@ import { ConfirmationComponent } from 'src/app/shared/modelPopups/confirmation/c
 export class RulesListComponent implements OnInit {
   sortColumn: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
-  ruleList:any = [];
-  
+  ruleList: any = [];
 
-  constructor(private router: Router,private toastr: ToastrService,
+
+  constructor(private router: Router, private toastr: ToastrService,
     private dialog: MatDialog,
-      private spinner: NgxSpinnerService, private apiService: APIService) {}
+    private spinner: NgxSpinnerService, private apiService: APIService) { }
 
   ngOnInit(): void {
     this.getRuleList();
   }
 
-  getRuleList(){
+  getRuleList() {
     this.spinner.show();
     this.apiService.get('/rule/list').subscribe(
       (res: any) => {
         this.spinner.hide();
         if (res.body.status_code === 200 || res.body.status_code === 201) {
           // this.toastr.success(res.body.message);
-            this.ruleList = res.body.data.rules
-              .sort((a: any, b: any) => b.rule_id - a.rule_id);
+          this.ruleList = res.body.data.rules
+            .sort((a: any, b: any) => b.rule_id - a.rule_id);
         }
         else {
           this.toastr.error(res.body.message);
@@ -59,7 +59,7 @@ export class RulesListComponent implements OnInit {
       this.sortColumn = column;
       this.sortDirection = 'asc';
     }
-    this.ruleList.sort((a:any, b:any) => {
+    this.ruleList.sort((a: any, b: any) => {
       const key = column as keyof typeof a; // type-safe access
       const valA = a[key]?.toString().toLowerCase() ?? '';
       const valB = b[key]?.toString().toLowerCase() ?? '';
@@ -69,11 +69,11 @@ export class RulesListComponent implements OnInit {
     });
   }
 
-  editRule(rule: any,name:string){
-      this.router.navigate(['rules/create'], { state: { rule, isMode: name} });
+  editRule(rule: any, name: string) {
+    this.router.navigate(['rules/create'], { state: { rule, isMode: name } });
   }
 
-  deleteRule(rule: any){
+  deleteRule(rule: any) {
     const dialogRefs = this.dialog.open(ConfirmationComponent, {
       width: '500px',
       data: {

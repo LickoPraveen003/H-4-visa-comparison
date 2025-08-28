@@ -18,8 +18,8 @@
                                 <input id="ruleId" type="text" [inputConditions]="'alphanumericWithSpace'"
                                     maxlength="50" class="form-control" formControlName="ruleId">
                                 <div *ngIf="ruleForm.get('ruleId')!.invalid && ruleForm.get('ruleId')!.touched">
-                                    <small class="text-danger"
-                                        *ngIf="ruleForm.get('ruleId')!.errors?.['required']">Rule Id is
+                                    <small class="text-danger" *ngIf="ruleForm.get('ruleId')!.errors?.['required']">Rule
+                                        Id is
                                         required.</small>
                                     <!-- <small class="text-danger"
                                         *ngIf="ruleForm.get('ruleId')!.errors?.['minlength']">Enter Valid
@@ -38,7 +38,8 @@
                                 </select>
                                 <div *ngIf="ruleForm.get('docType')!.invalid && ruleForm.get('docType')!.touched">
                                     <small class="text-danger"
-                                        *ngIf="ruleForm.get('docType')!.errors?.['required']">Document Type is required.</small>
+                                        *ngIf="ruleForm.get('docType')!.errors?.['required']">Document Type is
+                                        required.</small>
                                 </div>
                             </div>
                         </div>
@@ -90,8 +91,7 @@
                                     <option value="Medium">Medium</option>
                                     <option value="High">High</option>
                                 </select>
-                                <div
-                                    *ngIf="ruleForm.get('severity')!.invalid && ruleForm.get('severity')!.touched">
+                                <div *ngIf="ruleForm.get('severity')!.invalid && ruleForm.get('severity')!.touched">
                                     <small class="text-danger"
                                         *ngIf="ruleForm.get('severity')!.errors?.['required']">Severity is
                                         required.</small>
@@ -105,7 +105,8 @@
                             <div class="col-md-8">
                                 <input id="description" type="text" [inputConditions]="'alphanumericWithSpace'"
                                     maxlength="100" class="form-control" formControlName="description">
-                                <div *ngIf="ruleForm.get('description')!.invalid && ruleForm.get('description')!.touched">
+                                <div
+                                    *ngIf="ruleForm.get('description')!.invalid && ruleForm.get('description')!.touched">
                                     <small class="text-danger"
                                         *ngIf="ruleForm.get('description')!.errors?.['required']">Rule Description is
                                         required.</small>
@@ -136,8 +137,10 @@
                     <div class="col-md-10 col-lg-10 col-sm-12 mt-3">
                         <div class="col-12">
                             <button type="button" class="btn btn-cancel me-2" (click)="onCancel()">Cancel</button>
-                            <button type="button" class="btn btn-submit" *ngIf="isMode === 'New'" (click)="createRule()">Submit</button>
-                            <button type="button" class="btn btn-submit" *ngIf="isMode === 'Edit'" (click)="createRule()">Update</button>
+                            <button type="button" class="btn btn-submit" *ngIf="isMode === 'New'"
+                                (click)="createRule()">Submit</button>
+                            <button type="button" class="btn btn-submit" *ngIf="isMode === 'Edit'"
+                                (click)="createRule()">Update</button>
                         </div>
                     </div>
                 </div>

@@ -52,21 +52,21 @@ hr {
     color: white;
 }
 
-.pointer{
+.pointer {
     cursor: pointer;
 }
 
-.pointer:hover{
+.pointer:hover {
     text-decoration: underline;
 }
 
-.table-dark{
+.table-dark {
     --bs-table-border-color: grey !important;
-    --bs-table-bg:#3C83AF !important;
+    --bs-table-bg: #3C83AF !important;
     background-color: #3C83AF !important;
 }
 
-.table-responsive{
+.table-responsive {
     height: auto;
     max-height: 365px;
 }

@@ -20,9 +20,9 @@ export class ComplainCheckerComponent {
   isDocEntered: boolean = false;
   ischeckCompliance: boolean = false;
   @ViewChild('fileInputDoc') fileInputDoc!: ElementRef;
-  compareData:any = []
+  compareData: any = []
 
-rulesList = [
+  rulesList = [
     { id: 1, name: 'Rule A', rule_number: 'r001', rule_name: 'Rule A', gender: 'Male' },
     { id: 2, name: 'Rule B', rule_number: 'r002', rule_name: 'Rule B', gender: 'Female' },
     { id: 3, name: 'Rule C', rule_number: 'r003', rule_name: 'Rule C', gender: 'Male' },
@@ -31,7 +31,7 @@ rulesList = [
 
   constructor(private fb: FormBuilder, private toastr: ToastrService,
     private spinner: NgxSpinnerService, private apiService: APIService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.uploadForm = this.fb.group({
@@ -39,11 +39,11 @@ rulesList = [
       docName: ['', Validators.required],
       // selectedRules: [[], Validators.required]
     });
-    const defaultSelectedIds = this.rulesList.map((rule:any) => rule.id);
+    const defaultSelectedIds = this.rulesList.map((rule: any) => rule.id);
     this.uploadForm.get('selectedRules')?.setValue(defaultSelectedIds);
   }
 
-    onFileSelectedDoc(event: Event): void {
+  onFileSelectedDoc(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input?.files?.length) {
       this.handleFileDoc(input.files[0]);
@@ -51,7 +51,7 @@ rulesList = [
   }
 
   uploadDoc(file: File) {
-    if (this.uploadForm.invalid){
+    if (this.uploadForm.invalid) {
       this.uploadForm.markAllAsTouched();
       this.isDocEntered = false;
       this.uploadForm.get('docName')?.reset();
@@ -93,14 +93,14 @@ rulesList = [
   }
 
 
-  checkCompliance(){
-    if (this.uploadForm.invalid){
+  checkCompliance() {
+    if (this.uploadForm.invalid) {
       this.uploadForm.markAllAsTouched();
       return;
     }
     this.spinner.show();
     // this.compareDocId = 'doc_de2df7e4'
-    this.apiService.post(`/validate/validate?document_id=${this.compareDocId || ''}`,{}).subscribe(
+    this.apiService.post(`/validate/validate?document_id=${this.compareDocId || ''}`, {}).subscribe(
       (res: any) => {
         this.spinner.hide();
         if (res.body.status_code === 200 || res.body.status_code === 201) {
@@ -176,7 +176,7 @@ rulesList = [
     this.ischeckCompliance = false;
     this.uploadForm.reset();
     this.uploadForm.get('docType')?.setValue('');
-    const defaultSelectedIds = this.rulesList.map((rule:any) => rule.id);
+    const defaultSelectedIds = this.rulesList.map((rule: any) => rule.id);
     this.uploadForm.get('selectedRules')?.setValue(defaultSelectedIds);
   }
 
