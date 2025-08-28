@@ -6,7 +6,7 @@
 .main {
     padding: 30px 40px;
     background-color: white;
-    min-height: 520px;
+    min-height: 515px;
     max-height: 100%;
     overflow-y: auto;
 }
@@ -154,6 +154,7 @@ hr {
 
 .accordion-item{
     border: 0px;
+    margin-bottom: 10px;
 }
 
 .accordion-button:not(.collapsed)::after {

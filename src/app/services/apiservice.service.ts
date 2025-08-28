@@ -19,9 +19,23 @@ export class APIService {
         catchError(this.handleError)
       );
   }
+
+  put(endpoint: string, data: any): Observable<HttpResponse<any>> {
+    const url = `${this.apiUrl}${endpoint}`; 
+    return this.http.put<any>(url, data, { observe: 'response' }) 
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
   
   get(endpoint: string): Observable<HttpResponse<any>> {
     return this.http.get(`${this.apiUrl}${endpoint}`,{ observe: 'response' }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  delete(endpoint: string): Observable<HttpResponse<any>> {
+    return this.http.delete(`${this.apiUrl}${endpoint}`,{ observe: 'response' }).pipe(
       catchError(this.handleError)
     );
   }

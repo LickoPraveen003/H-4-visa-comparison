@@ -8,6 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputConditionsDirective } from './directives/input-conditions.directive';
 import { ConfirmationComponent } from './modelPopups/confirmation/confirmation.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -22,7 +23,7 @@ import { ConfirmationComponent } from './modelPopups/confirmation/confirmation.c
     MatInputModule,
     MatTableModule,
     MatButtonModule,
-    MatDialogModule
+    RouterModule
   ],
   exports:[
     HeaderComponent,

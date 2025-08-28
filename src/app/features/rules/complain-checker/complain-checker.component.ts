@@ -14,29 +14,20 @@ export class ComplainCheckerComponent {
   uploadForm!: FormGroup;
 
   documentTypes = ['Passport', 'Visa', 'I-94'];
-  rules = ['Rule A', 'Rule B', 'Rule C'];
-
-  isDocUploaded: boolean = false;
+  ruleOptions: string[] = ['rule1', 'rule2', 'rule3'];
   uploadedFile: File | null = null;
-  documentName: string = '';
   fileError: string = '';
   isDocEntered: boolean = false;
   ischeckCompliance: boolean = false;
   @ViewChild('fileInputDoc') fileInputDoc!: ElementRef;
-compareData = [
-  {
-    rule_number: 'Rule 1',
-    rule_name:'I-140 should be valid for the spouse',
-    rule_description: 'The “H4 EAD Application” has no mention of the I-140 approval details ',
-    severity:'Low'
-  },
-  {
-    rule_number: 'Rule 2',
-    rule_name:'I-140 should be valid for the spouse',
-    rule_description: 'The “H4 EAD Application” has no mention of the I-140 approval details ',
-    severity:'High'
-  }
-]
+  compareData:any = []
+
+rulesList = [
+    { id: 1, name: 'Rule A', rule_number: 'r001', rule_name: 'Rule A', gender: 'Male' },
+    { id: 2, name: 'Rule B', rule_number: 'r002', rule_name: 'Rule B', gender: 'Female' },
+    { id: 3, name: 'Rule C', rule_number: 'r003', rule_name: 'Rule C', gender: 'Male' },
+  ]
+  compareDocId: any = '';
 
   constructor(private fb: FormBuilder, private toastr: ToastrService,
     private spinner: NgxSpinnerService, private apiService: APIService,
@@ -45,8 +36,11 @@ compareData = [
   ngOnInit(): void {
     this.uploadForm = this.fb.group({
       docType: ['', Validators.required],
-      rule: ['', Validators.required]
+      docName: ['', Validators.required],
+      // selectedRules: [[], Validators.required]
     });
+    const defaultSelectedIds = this.rulesList.map((rule:any) => rule.id);
+    this.uploadForm.get('selectedRules')?.setValue(defaultSelectedIds);
   }
 
     onFileSelectedDoc(event: Event): void {
@@ -56,49 +50,79 @@ compareData = [
     }
   }
 
-  checkCompliance(){
-    this.ischeckCompliance = true;
+  uploadDoc(file: File) {
+    if (this.uploadForm.invalid){
+      this.uploadForm.markAllAsTouched();
+      this.isDocEntered = false;
+      this.uploadForm.get('docName')?.reset();
+      return;
+    }
+    this.spinner.show();
+    const formData = new FormData();
+    formData.append('file', file || '');
+    formData.append('name_of_document', file.name || '');
+    formData.append('document_type', this.uploadForm.get('docType')?.value || '');
+    this.apiService.post('/document/create/document', formData).subscribe(
+      (res: any) => {
+        this.spinner.hide();
+        if (res.body.status_code === 200 || res.body.status_code === 201) {
+          this.isDocEntered = true;
+          this.compareDocId = res.body.data.document_id;
+          this.toastr.success(res.body.message);
+          setTimeout(() => {
+            this.toastr.clear();
+          }, 3000);
+        }
+        else {
+          this.isDocEntered = false;
+          this.toastr.error(res.body.message);
+          setTimeout(() => {
+            this.toastr.clear();
+          }, 3000);
+        }
+      },
+      (error: any) => {
+        this.spinner.hide();
+        this.isDocEntered = false;
+        this.toastr.error(error?.statusText || 'An error occurred while processing your request. Please try again later.');
+        setTimeout(() => {
+          this.toastr.clear();
+        }, 3000);
+      }
+    );
   }
 
-  uploadDoc(file: File) {
-    this.isDocEntered = true;
-    // this.spinner.show();
-    // const formData = new FormData();
-    // formData.append('file', file, file.name);
-    // formData.append('vendor', 'newtest310725');
-    // formData.append('product', 'newtest310725');
-    // formData.append('category', 'newtest310725');
-    // formData.append('collection_name', 'newtest310725doc');
-    // this.apiService.post('/redline/ai/v1/document', formData).subscribe(
-    //   (res: any) => {
-    //     this.spinner.hide();
-    //     if (res.status === 200 || res.status === 201) {
-    //       this.isDocEntered = true;
-    //       this.toastr.success(res.body.status_message);
-    //       this.documentName = res.body.file_name;
-    //       setTimeout(() => {
-    //         this.toastr.clear();
-    //       }, 3000);
-    //     }
-    //     else {
-    //       this.isDocEntered = false;
-    //       this.toastr.error(res.body.status_message);
-    //       setTimeout(() => {
-    //         this.documentName = '';
-    //         this.toastr.clear();
-    //       }, 3000);
-    //     }
-    //   },
-    //   (error: any) => {
-    //     this.spinner.hide();
-    //     this.isDocEntered = false;
-    //     this.toastr.error(error?.statusText || 'An error occurred while processing your request. Please try again later.');
-    //     setTimeout(() => {
-    //       this.toastr.clear();
-    //       this.documentName = '';
-    //     }, 3000);
-    //   }
-    // );
+
+  checkCompliance(){
+    if (this.uploadForm.invalid){
+      this.uploadForm.markAllAsTouched();
+      return;
+    }
+    this.spinner.show();
+    // this.compareDocId = 'doc_de2df7e4'
+    this.apiService.post(`/validate/validate?document_id=${this.compareDocId || ''}`,{}).subscribe(
+      (res: any) => {
+        this.spinner.hide();
+        if (res.body.status_code === 200 || res.body.status_code === 201) {
+          this.ischeckCompliance = true;
+          this.compareData = res.body.data;
+          this.toastr.success(res.body.message);
+        }
+        else {
+          this.toastr.error(res.body.message);
+          setTimeout(() => {
+            this.toastr.clear();
+          }, 3000);
+        }
+      },
+      (error: any) => {
+        this.spinner.hide()
+        this.toastr.error(error?.statusText || 'An error occurred while processing your request. Please try again later.');
+        setTimeout(() => {
+          this.toastr.clear();
+        }, 3000);
+      }
+    );
   }
 
   onDragOverDoc(event: DragEvent): void {
@@ -120,16 +144,19 @@ compareData = [
   }
 
   handleFileDoc(file: File): void {
-    const allowedTypes = [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      'text/plain'
-    ];
+    // const allowedTypes = [
+    //   'application/pdf',
+    //   'application/msword',
+    //   'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    //   'text/plain'
+    // ];
+
+    const allowedTypes = ['application/pdf'];
 
     if (!allowedTypes.includes(file.type)) {
       this.fileInputDoc.nativeElement.value = '';
-      this.toastr.error('Only PDF, DOC, DOCX, or TXT files are allowed');
+      // this.toastr.error('Only PDF, DOC, DOCX, or TXT files are allowed');
+      this.toastr.error('Only PDF files are allowed');
       return;
     }
     if (file.size > 200 * 1024 * 1024) {
@@ -138,7 +165,7 @@ compareData = [
       return;
     }
     this.isDocEntered = true;
-    this.documentName = file.name;
+    this.uploadForm.get('docName')?.setValue(file.name);
     this.uploadDoc(file);
     console.log('Uploading file:', file);
     // TODO: Upload logic here
@@ -148,32 +175,14 @@ compareData = [
     this.isDocEntered = false;
     this.ischeckCompliance = false;
     this.uploadForm.reset();
+    this.uploadForm.get('docType')?.setValue('');
+    const defaultSelectedIds = this.rulesList.map((rule:any) => rule.id);
+    this.uploadForm.get('selectedRules')?.setValue(defaultSelectedIds);
   }
 
   resetDoc() {
     this.isDocEntered = false;
     this.ischeckCompliance = false;
-  }
-
-  // Final submission logic
-  onSubmit(): void {
-    if (this.uploadForm.invalid || !this.uploadedFile) {
-      this.toastr.warning('Please fill all fields and upload a valid file');
-      return;
-    }
-
-    // Submission payload
-    const formData = new FormData();
-    formData.append('documentType', this.uploadForm.get('documentType')?.value);
-    formData.append('rule', this.uploadForm.get('rule')?.value);
-    formData.append('file', this.uploadedFile);
-
-    console.log('Submitting form:', this.uploadForm.value);
-    console.log('Uploaded file:', this.uploadedFile.name);
-
-    this.toastr.success('Form submitted successfully!');
-
-    // TODO: You can send `formData` to your backend using HttpClient
-    // this.http.post('/api/upload', formData).subscribe(...)
+    this.uploadForm.get('docName')?.reset();
   }
 }

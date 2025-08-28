@@ -13,3 +13,4 @@ body{
 .mat-mdc-dialog-container .mdc-dialog__content{
   color: unset !important;
 }
+@import '~@ng-select/ng-select/themes/default.theme.css';

@@ -56,16 +56,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let rule of rules">
-            <td class="pointer" (click)="editRule(rule,'View')"><strong>{{ rule.ruleId }}</strong></td>
-            <td>{{ rule.ruleName }}</td>
-            <td>{{ rule.docType }}</td>
+          <tr *ngFor="let rule of ruleList">
+            <td class="pointer" (click)="editRule(rule,'View')"><strong>{{ rule.rule_id }}</strong></td>
+            <td>{{ rule.rule_name }}</td>
+            <td>{{ rule.document_type }}</td>
             <td>{{ rule.severity }}</td>
             <td>{{ rule.priority }}</td>
             <td>
-              <button class="btn btn-sm">
+              <div class="d-flex">
+                <button class="btn btn-sm">
                 <i class="fa fa-pencil" title="Edit" (click)="editRule(rule,'Edit')"></i>
               </button>
+              <button class="btn btn-sm">
+                <i class="fa fa-trash" title="Delete" (click)="deleteRule(rule)"></i>
+              </button>
+              </div>
             </td>
           </tr>
         </tbody>

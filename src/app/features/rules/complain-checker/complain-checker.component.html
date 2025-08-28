@@ -2,6 +2,8 @@
     <div class="main">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="fw-bold">Complaince Checker</h5>
+            <button class="btn btn-add" (click)="onCancel()" *ngIf="ischeckCompliance">
+                Back</button>
         </div>
         <hr>
         <div class="complaince-form" *ngIf="!ischeckCompliance">
@@ -13,7 +15,7 @@
                     <div class="col-lg-6 col-sm-9">
                         <select id="docType" class="form-select" formControlName="docType">
                             <option value="">Select</option>
-                            <option>HexaCorp</option>
+                            <option value="H4">H4</option>
                         </select>
                         <div *ngIf="uploadForm.get('docType')!.invalid && uploadForm.get('docType')!.touched">
                             <small class="text-danger" *ngIf="uploadForm.get('docType')!.errors?.['required']">Document
@@ -41,35 +43,53 @@
                         <div class="dot-box" *ngIf="isDocEntered">
                             <img src="../../../../assets/images/uploaded-doc.png" alt="" height="100px">
                             <p class="doc-name">
-                                {{ documentName }}
+                                {{ uploadForm.get('docName')?.value }}
                                 <i class="doc-name-close" (click)="resetDoc()">&times;</i>
                             </p>
                         </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-lg-3 col-sm-3">
-                        <label for="rule" class="form-label">Select Rule</label>
-                    </div>
-                    <div class="col-lg-6 col-sm-9">
-                        <select id="rule" class="form-select" formControlName="rule">
-                            <option value="">Select</option>
-                            <option>rule1</option>
-                        </select>
-                        <div *ngIf="uploadForm.get('rule')!.invalid && uploadForm.get('rule')!.touched">
-                            <small class="text-danger" *ngIf="uploadForm.get('rule')!.errors?.['required']">Rule
+                        <div *ngIf="uploadForm.get('docName')!.invalid && uploadForm.get('docName')!.touched">
+                            <small class="text-danger" *ngIf="uploadForm.get('docName')!.errors?.['required']">Document
                                 is required.</small>
                         </div>
                     </div>
                 </div>
+                <!-- <div class="row mt-3">
+                    <div class="col-lg-3 col-sm-3">
+                        <label for="rule" class="form-label">Select Rule</label>
+                    </div> -->
+                    <!-- <div class="col-lg-6 col-sm-9">
+                        <mat-form-field appearance="fill" class="full-width w-100">
+                        <mat-select formControlName="rule" multiple>
+                            <mat-option *ngFor="let rule of ruleOptions" [value]="rule">{{ rule }}</mat-option>
+                        </mat-select>
+                        </mat-form-field>
+                    </div> -->
+                    <!-- <div class="col-lg-6 col-sm-9">
+                        <ng-select placeholder="Select Rules" [items]="rulesList" [multiple]="true" bindLabel="name"
+                            [selectableGroup]="true" [closeOnSelect]="false" bindValue="id"
+                            formControlName="selectedRules" [dropdownPosition]="'top'">
+                            <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                                <input id="item-{{ index }}" type="checkbox" [checked]="item$.selected" /> {{
+                                item.rule_number | uppercase }}
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                <input id="item-{{ index }}" type="checkbox" [checked]="item$.selected" /> {{
+                                item.rule_name }}
+                            </ng-template>
+                        </ng-select>
+                        <div *ngIf="uploadForm.get('selectedRules')!.invalid && uploadForm.get('selectedRules')!.touched">
+                            <small class="text-danger" *ngIf="uploadForm.get('selectedRules')!.errors?.['required']">Select atleast one Rule</small>
+                        </div>
+                    </div>
+                </div> -->
                 <div class="row mt-3">
                     <div class="col-md-3 col-sm-12">
                     </div>
                     <div class="col-md-9 col-sm-12">
                         <div class="col-12">
-                            <button type="button" class="btn btn-cancel me-2 mt-3" (click)="onCancel()">Cancel</button>
-                            <button type="button" class="btn btn-submit mt-3" [disabled]="isDocUploaded"
-                                (click)="checkCompliance()">Check rule complaince</button>
+                            <!-- <button type="button" class="btn sbtn-cancel me-2 mt-3" (click)="onCancel()">Cancel</button> -->
+                            <button type="button" class="btn btn-submit mt-3" [disabled]="!isDocEntered"
+                                (click)="checkCompliance()">Check rule compliance</button>
                         </div>
                     </div>
                 </div>
@@ -78,27 +98,29 @@
         <div *ngIf="ischeckCompliance">
             <div class="results">
                 <div class="d-flex">
-                        <h6 class="me-2 mb-0">Document Name:</h6>
-                        <h5 class="main-title mb-0">H-4 Visa</h5>
-                    </div>
+                    <h6 class="me-2 mb-0">Document Name:</h6>
+                    <h5 class="main-title mb-0"> {{ compareData.document_name }}</h5>
+                </div>
                 <div class="center-align">
                     <div class="center-align">
                         <h6 class="mb-0">Rules passed:</h6>
-                        <h5 class="main-title mb-0">2/3</h5>
+                        <h5 class="main-title mb-0">
+                            {{ compareData.passed_rules }} / {{ compareData.total_rules }}
+                        </h5>
                     </div>
                     <div class="center-align">
                         <h6 class="mb-0">Compliance:</h6>
-                        <h5 class="main-title mb-0">78%</h5>
+                        <h5 class="main-title mb-0">{{ compareData.compliance_percentage }}%</h5>
                     </div>
                     <div class="center-align">
                         <h6 class="mb-0">Status:</h6>
-                        <button class="btn status-btn">Not ready</button>
+                        <button class="btn status-btn">{{ compareData.overall_status }}</button>
                     </div>
                 </div>
             </div>
             <h4 class="main-title mt-3">Rule Details</h4>
             <div class="accordion" id="accordionExample">
-                <div class="accordion-item" *ngFor="let item of compareData; let i = index">
+                <div class="accordion-item" *ngFor="let item of compareData.validation_results; let i = index">
                     <h2 class="accordion-header" [id]="'heading' + i">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             [attr.data-bs-target]="'#collapse' + i" [attr.aria-controls]="'collapse' + i"
@@ -106,15 +128,28 @@
                             <img src="../../../../assets/images/check-circle.png" class="me-2"
                                 *ngIf="item.severity === 'High'">
                             <img src="../../../../assets/images/warning-circle.png" class="me-2"
-                                *ngIf="item.severity === 'Low'">
-                            {{ item.rule_number }}. {{ item.rule_name }}
+                                *ngIf="item.severity === 'Low' || item.severity === 'Medium'">
+                            {{ item.rule_id || 'NA' }}. {{ item.rule_name || 'NA' }}
 
                         </button>
                     </h2>
                     <div [id]="'collapse' + i" class="accordion-collapse collapse" [class.show]="i === 0"
                         [attr.aria-labelledby]="'heading' + i" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            <p>{{ item.rule_description }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5>Validation Message:</h5>
+                                    <p>{{ item.validation_message || 'NA'}}</p>
+                                </div>
+                                <button class="btn status-btn">{{ item.validation_status || 'NA'}}</button>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5>Conclusion:</h5>
+                                    <p>{{ item.details.conclusion || 'NA'}}</p>
+                                </div>
+                                <button class="btn status-btn">{{ item.severity || 'NA'}}</button>
+                            </div>
                         </div>
                     </div>
                 </div>

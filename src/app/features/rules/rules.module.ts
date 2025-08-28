@@ -8,7 +8,11 @@ import { CreateRulesComponent } from './create-rules/create-rules.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 import { ComplainCheckerComponent } from './complain-checker/complain-checker.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { ComplainCheckerComponent } from './complain-checker/complain-checker.co
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    NgSelectModule,
   ]
 })
 export class RulesModule { }

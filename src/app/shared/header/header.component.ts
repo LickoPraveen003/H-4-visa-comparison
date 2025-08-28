@@ -12,6 +12,6 @@ export class HeaderComponent {
     ngOnInit(): void { }
   
     backToDashboard() {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/rules/check']);
     }
 }

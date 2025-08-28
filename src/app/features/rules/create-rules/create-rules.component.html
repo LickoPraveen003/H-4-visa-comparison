@@ -21,9 +21,9 @@
                                     <small class="text-danger"
                                         *ngIf="ruleForm.get('ruleId')!.errors?.['required']">Rule Id is
                                         required.</small>
-                                    <small class="text-danger"
+                                    <!-- <small class="text-danger"
                                         *ngIf="ruleForm.get('ruleId')!.errors?.['minlength']">Enter Valid
-                                        Input.</small>
+                                        Input.</small> -->
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                             <div class="col-md-8">
                                 <select id="docType" class="form-select" formControlName="docType">
                                     <option value="">Select</option>
-                                    <option>HexaCorp</option>
+                                    <option value="H4">H4</option>
                                 </select>
                                 <div *ngIf="ruleForm.get('docType')!.invalid && ruleForm.get('docType')!.touched">
                                     <small class="text-danger"
@@ -49,8 +49,9 @@
                             <div class="col-md-8">
                                 <select id="priority" class="form-select" formControlName="priority">
                                     <option value="">Select</option>
-                                    <option value="Cybersecurity">Cybersecurity</option>
-                                    <option value="Rule Name">Rule Name</option>
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
                                 </select>
                                 <div *ngIf="ruleForm.get('priority')!.invalid && ruleForm.get('priority')!.touched">
                                     <small class="text-danger"
@@ -72,9 +73,9 @@
                                     <small class="text-danger"
                                         *ngIf="ruleForm.get('ruleName')!.errors?.['required']">Rule Name is
                                         required.</small>
-                                    <small class="text-danger"
+                                    <!-- <small class="text-danger"
                                         *ngIf="ruleForm.get('ruleName')!.errors?.['minlength']">Enter Valid
-                                        Input.</small>
+                                        Input.</small> -->
                                 </div>
                             </div>
                         </div>
@@ -85,8 +86,9 @@
                             <div class="col-md-8">
                                 <select id="severity" class="form-select" formControlName="severity">
                                     <option value="">Select</option>
-                                    <option value="Manual Check">Manual Check</option>
-                                    <option value="Coupa">Coupa</option>
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
                                 </select>
                                 <div
                                     *ngIf="ruleForm.get('severity')!.invalid && ruleForm.get('severity')!.touched">
@@ -96,18 +98,35 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="rule_Des" class="form-label">Rule Description</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="description" type="text" [inputConditions]="'alphanumericWithSpace'"
+                                    maxlength="100" class="form-control" formControlName="description">
+                                <div *ngIf="ruleForm.get('description')!.invalid && ruleForm.get('description')!.touched">
+                                    <small class="text-danger"
+                                        *ngIf="ruleForm.get('description')!.errors?.['required']">Rule Description is
+                                        required.</small>
+                                    <!-- <small class="text-danger"
+                                        *ngIf="ruleForm.get('description')!.errors?.['maxlength']">Enter Valid
+                                        Input.</small> -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4 col-lg-2 col-sm-12">
-                        <label for="description" class="form-label">Rule Description</label>
+                        <label for="prompt" class="form-label">Rule Prompt</label>
                     </div>
                     <div class="col-md-8 col-lg-10 col-sm-12">
-                        <textarea id="description" class="form-control" rows="2"
-                            formControlName="description"></textarea>
-                        <div *ngIf="ruleForm.get('description')!.invalid && ruleForm.get('description')!.touched">
-                            <small class="text-danger" *ngIf="ruleForm.get('description')!.errors?.['required']">Rule
-                                Description is required.</small>
+                        <textarea id="prompt" class="form-control" rows="2" maxlength="250"
+                            formControlName="prompt"></textarea>
+                        <div *ngIf="ruleForm.get('prompt')!.invalid && ruleForm.get('prompt')!.touched">
+                            <small class="text-danger" *ngIf="ruleForm.get('prompt')!.errors?.['required']">Rule
+                                Rule Prompt is required.</small>
                         </div>
                     </div>
                 </div>
@@ -117,8 +136,8 @@
                     <div class="col-md-10 col-lg-10 col-sm-12 mt-3">
                         <div class="col-12">
                             <button type="button" class="btn btn-cancel me-2" (click)="onCancel()">Cancel</button>
-                            <button type="button" class="btn btn-submit" *ngIf="isMode === 'New'">Submit</button>
-                            <button type="button" class="btn btn-submit" *ngIf="isMode === 'Edit'">Update</button>
+                            <button type="button" class="btn btn-submit" *ngIf="isMode === 'New'" (click)="createRule()">Submit</button>
+                            <button type="button" class="btn btn-submit" *ngIf="isMode === 'Edit'" (click)="createRule()">Update</button>
                         </div>
                     </div>
                 </div>
